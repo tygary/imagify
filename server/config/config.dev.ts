@@ -1,21 +1,24 @@
-import Config from '../types/config';
+import Config from "../types/config";
 
 const devConfig: Config = {
   db: {
-    uri: process.env.MONGO_URI || 'mongodb://localhost:27017',
+    uri: process.env.MONGO_URI || "mongodb://localhost:27017",
     options: {
-      user: process.env.MONGO_USERNAME || '',
-      pass: process.env.MONGO_USERNAME || '',
-      dbName: 'dev',
+      user: process.env.MONGO_USERNAME || "",
+      pass: process.env.MONGO_USERNAME || "",
+      dbName: "dev",
       keepAlive: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
     },
   },
   jwt: {
-    secret: 'jwtSecret',
+    secret: "jwtSecret",
     expiration: 360000,
+  },
+  runpod: {
+    apikey: process.env.RUNPOD_API_KEY || "",
   },
 };
 

@@ -1,12 +1,12 @@
-import Config from '../types/config';
+import Config from "../types/config";
 
 const prodConfig: Config = {
   db: {
-    uri: process.env.MONGO_URI || '<mongodb uri here>',
+    uri: process.env.MONGO_URI || "<mongodb uri here>",
     options: {
-      user: process.env.MONGO_USERNAME || '',
-      pass: process.env.MONGO_USERNAME || '',
-      dbName: 'prod',
+      user: process.env.MONGO_USERNAME || "",
+      pass: process.env.MONGO_USERNAME || "",
+      dbName: "prod",
       keepAlive: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -14,8 +14,11 @@ const prodConfig: Config = {
     },
   },
   jwt: {
-    secret: 'jwtSecret',
+    secret: "jwtSecret",
     expiration: 360000,
+  },
+  runpod: {
+    apikey: process.env.RUNPOD_API_KEY || "",
   },
 };
 
