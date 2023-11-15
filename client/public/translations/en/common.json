@@ -1,0 +1,15 @@
+{
+  "title": {
+    "register": "Register new user",
+    "login": "Login",
+    "main": "react-express-mongo-ts-boilerplate"
+  },
+  "label": {
+    "username": "Username",
+    "password": "Password",
+    "submit": "Submit",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  }
+}
