@@ -1,4 +1,5 @@
 import Config from "../types/config";
+import "dotenv/config";
 
 const prodConfig: Config = {
   db: {

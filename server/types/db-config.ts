@@ -1,4 +1,4 @@
-import { ConnectionOptions } from 'mongoose';
+import { ConnectionOptions } from "mongoose";
 
 type DbConfig = {
   uri: string;

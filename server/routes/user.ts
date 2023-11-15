@@ -1,21 +1,21 @@
-import { Request, Response, Router } from 'express';
-import { check, validationResult } from 'express-validator';
-import HttpStatusCodes from 'http-status-codes';
-import '../core/auth/strategies/local';
-import User from '../models/user';
-import * as jwt from 'jsonwebtoken';
-import config from '../config/config';
+import { Request, Response, Router } from "express";
+import { check, validationResult } from "express-validator";
+import HttpStatusCodes from "http-status-codes";
+import "../core/auth/strategies/local";
+import User from "../models/user";
+import * as jwt from "jsonwebtoken";
+import config from "../config/config";
 
 const router: Router = Router();
 
-// @route   POST api/user/local
+// @route   POST api/user/register
 // @desc    Register new user
 // @access  Public
 router.post(
-  '/register',
+  "/register",
   [
-    check('username', 'Username is required').exists(),
-    check('password', 'Password is required').exists(),
+    check("username", "Username is required").exists(),
+    check("password", "Password is required").exists(),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -35,6 +35,7 @@ router.post(
       );
       return res.status(HttpStatusCodes.OK).send({ token: token });
     } catch (err) {
+      console.log(err);
       return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send();
     }
   }

@@ -1,10 +1,5 @@
 import { Document, Model, model, Schema } from "mongoose";
 
-/**
- * interface to model the schema for typescript
- * @param username:string
- * @param password:string
- */
 export interface IImage extends Document {
   jobId: string;
   prompt: string;

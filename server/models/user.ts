@@ -1,5 +1,5 @@
-import { Document, Model, model, Schema } from 'mongoose';
-import bcrypt from 'bcryptjs';
+import { Document, Model, model, Schema } from "mongoose";
+import bcrypt from "bcryptjs";
 
 /**
  * interface to model the schema for typescript
@@ -27,7 +27,7 @@ const userSchema: Schema = new Schema({
   },
 });
 
-userSchema.pre<IUser>('save', function save(next) {
+userSchema.pre<IUser>("save", function save(next) {
   const user = this;
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -50,13 +50,14 @@ userSchema.methods.comparePassword = function (
 ) {
   bcrypt.compare(
     candidatePassword,
+    // @ts-ignore: Property does not exist on type
     this.password,
-    (err: Error, isMatch: boolean) => {
+    (err: Error | null, isMatch: boolean) => {
       callback(err, isMatch);
     }
   );
 };
 
-const User: Model<IUser> = model('User', userSchema);
+const User: Model<IUser> = model("User", userSchema) as unknown as Model<IUser>;
 
 export default User;

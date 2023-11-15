@@ -1,10 +1,10 @@
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import { Express } from 'express';
-import mongoose from 'mongoose';
-import passport from 'passport';
-import config from '../config/config';
-import { isProduction } from '../utils';
+import bodyParser from "body-parser";
+import cors from "cors";
+import { Express } from "express";
+import mongoose from "mongoose";
+import passport from "passport";
+import config from "../config/config";
+import { isProduction } from "../utils";
 
 export const initMiddleware = (app: Express) => {
   app.use(cors());
@@ -15,9 +15,9 @@ export const initMiddleware = (app: Express) => {
 export const initMongoose = () => {
   mongoose.connect(config.db.uri, config.db.options, (err) => {
     if (err) {
-      console.log('could not connect to mongodb');
+      console.log("could not connect to mongodb");
     }
-    mongoose.set('debug', !isProduction);
+    mongoose.set("debug", !isProduction);
   });
 };
 

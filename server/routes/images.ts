@@ -20,13 +20,15 @@ router.post(
     try {
       const generateResponse = await generateImage(req.body.prompt);
       if (generateResponse.id) {
-        const image = await Image.create({
+        const new_image = await Image.create({
           jobId: generateResponse.id,
           prompt: req.body.prompt,
         });
-        return res.status(HttpStatusCodes.OK).send({ id: image.jobId });
+        console.log(new_image);
+        return res.status(HttpStatusCodes.OK).send({ id: new_image.jobId });
       }
     } catch (err) {
+      console.log(err);
       return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send();
     }
   }
@@ -72,13 +74,18 @@ router.get("/updatePending", async (req: Request, res: Response) => {
     }
     return res.status(HttpStatusCodes.OK).send(updatedImages);
   } catch (err) {
+    console.log(err);
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send();
   }
 });
 
 const checkJobStatus = async (jobId: string): Promise<IImage | null> => {
   return retrieveJob(jobId).then((response) => {
-    if (response.status === "COMPLETED") {
+    if (
+      response.status === "COMPLETED" &&
+      response.output &&
+      response.output.length > 0
+    ) {
       const image = Image.findOneAndUpdate(
         { jobId },
         {

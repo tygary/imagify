@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
-import passport from 'passport';
-import passportJwt from 'passport-jwt';
-import config from '../../../config/config';
-import User from '../../../models/user';
+import { NextFunction, Request, Response } from "express";
+import passport from "passport";
+import passportJwt from "passport-jwt";
+import config from "../../../config/config";
+import User from "../../../models/user";
 
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
@@ -14,16 +14,19 @@ passport.use(
       secretOrKey: config.jwt.secret,
     },
     function (jwtToken, done) {
-      User.findOne({ username: jwtToken.username }, function (err, user) {
-        if (err) {
-          return done(err, false);
+      User.findOne(
+        { username: jwtToken.username },
+        function (err: any, user: any) {
+          if (err) {
+            return done(err, false);
+          }
+          if (user) {
+            return done(undefined, user, jwtToken);
+          } else {
+            return done(undefined, false);
+          }
         }
-        if (user) {
-          return done(undefined, user, jwtToken);
-        } else {
-          return done(undefined, false);
-        }
-      });
+      );
     }
   )
 );
@@ -33,13 +36,13 @@ export const authenticateJwt = (
   res: Response,
   next: NextFunction
 ) => {
-  passport.authenticate('jwt', (err, user) => {
+  passport.authenticate("jwt", (err: any, user: any) => {
     if (err) {
       console.log(err);
-      return res.status(401).json({ status: 'error', code: 'unauthorized' });
+      return res.status(401).json({ status: "error", code: "unauthorized" });
     }
     if (!user) {
-      return res.status(401).json({ status: 'error', code: 'unauthorized' });
+      return res.status(401).json({ status: "error", code: "unauthorized" });
     } else {
       return next();
     }
