@@ -4,11 +4,19 @@ import { ImageObject, UpdatedImagesResponse } from '../Services/api';
 export const useGenerateImage = () => {
   const client = useQueryClient();
   return useMutation(
-    (prompt: string) =>
+    ({
+      prompt,
+      width,
+      height,
+    }: {
+      prompt: string;
+      width: number;
+      height: number;
+    }) =>
       fetch('/api/images/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, width, height }),
       }).then(res => res.json() as Promise<ImageObject>),
     {
       onSuccess: (data: ImageObject) => {
