@@ -1,55 +1,8 @@
-# react-express-mongo-ts-boilerplate
+# Imagify
 
-React, Express and MongoDB combined into a solid full stack boilerplate to kickstart your new projects
-
-![Express 4](https://img.shields.io/badge/express-4.17.x-green.svg)
-![React 16](https://img.shields.io/badge/reactjs-16.13.x-green.svg)
-![Webpack 4](https://img.shields.io/badge/webpack-4.44.x-green.svg)
-
-Full stack boilerplate built with React, Express and MongoDB at its core, with a few handpicked libraries that I prefer to use when starting new projects. Everything is built on TypeScript to ensure type safety.
-
-## Core
-
-**Server**
-
-- NodeJS
-- Express
-- MongoDB with mongoose
-- Passport with jwt
-
-**Client**
-
-- React
-- Mobx
-- Material UI
-- Axios with axios-observable
-- RxJS
-- Formik
-- i18next
+Demo of Fullstack Tiling Image Application
 
 ## Usage
-
-Run the following commands separately for client and server
-
-Install dependencies
-
-```
-$ npm install
-```
-
-Development
-
-```
-$ npm start
-```
-
-Production
-
-```
-$ npm run build
-```
-
-https://github.com/viktorgullmark/react-express-mongo-ts-boilerplate
 
 Install MongoDB Locally
 
@@ -59,3 +12,30 @@ brew update
 brew install mongodb-community@7.0
 brew services start mongodb-community@7.0
 ```
+
+Set up your .env
+
+```
+cd server
+cp .env.example .env
+Add your runpod key
+```
+
+Start the server
+
+```
+cd server
+yarn start
+```
+
+Start the frontend
+
+```
+cd client
+yarn dev
+```
+
+Based Upon Boilerplates:
+
+- https://github.com/viktorgullmark/react-express-mongo-ts-boilerplate
+- https://github.com/a8hok/React-typescript-tailwind-boilerplate
