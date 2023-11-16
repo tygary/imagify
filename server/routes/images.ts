@@ -9,7 +9,11 @@ const router: Router = Router();
 
 router.post(
   "/generate",
-  [check("prompt", "Prompt is required").exists()],
+  [
+    check("prompt", "Prompt is required").exists(),
+    check("width", "Width is required").exists(),
+    check("height", "Height is required").exists(),
+  ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -18,7 +22,11 @@ router.post(
         .json({ errors: errors.array() });
     }
     try {
-      const generateResponse = await generateImage(req.body.prompt);
+      const generateResponse = await generateImage(
+        req.body.prompt,
+        req.body.width,
+        req.body.height
+      );
       if (generateResponse.id) {
         const new_image = await Image.create({
           jobId: generateResponse.id,

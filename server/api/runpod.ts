@@ -19,7 +19,11 @@ interface StatusResponse {
   status: string;
 }
 
-const generateImage = async (prompt: string): Promise<GenerateResponse> => {
+const generateImage = async (
+  prompt: string,
+  width: number,
+  height: number
+): Promise<GenerateResponse> => {
   const options = {
     method: "POST",
     url: "https://api.runpod.ai/v2/stable-diffusion-v1/run",
@@ -31,8 +35,8 @@ const generateImage = async (prompt: string): Promise<GenerateResponse> => {
     data: {
       input: {
         prompt,
-        width: 512,
-        height: 512,
+        width,
+        height,
         guidance_scale: 7.5,
         num_inference_steps: 50,
         num_outputs: 1,
