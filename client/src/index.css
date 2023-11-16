@@ -1,0 +1,32 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body, html {
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    @apply text-app-text
+  }
+}
+
+/* Dialog */
+
+.dialog {
+  @apply bg-app-bg3 shadow-md rounded-lg focus:outline-none py-0 overflow-hidden;
+  @apply fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-md translate-x-[-50%] translate-y-[-50%];
+  @apply shadow-xl;
+
+  padding-right: var(--gutter-r);
+  padding-left: var(--gutter-l);
+}
+
+.dialog-overlay {
+  @apply bg-app-bg2 fixed inset-0 bg-opacity-70;
+}
+
+.dialog-close {
+  @apply absolute -top-2 right-0 p-3 cursor-pointer text-app-text;
+}

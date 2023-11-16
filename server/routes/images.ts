@@ -43,6 +43,9 @@ router.get("/all", async (req: Request, res: Response) => {
   }
   try {
     const images = await Image.find({});
+    images.sort((a, b) => {
+      return b.dateCreated.getTime() - a.dateCreated.getTime();
+    });
     return res.status(HttpStatusCodes.OK).send(images);
   } catch (err) {
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send();
@@ -72,7 +75,11 @@ router.get("/updatePending", async (req: Request, res: Response) => {
         );
       }
     }
-    return res.status(HttpStatusCodes.OK).send(updatedImages);
+    await Promise.all(promises);
+    return res.status(HttpStatusCodes.OK).send({
+      remaining: pending.length - updatedImages.length,
+      updated: updatedImages,
+    });
   } catch (err) {
     console.log(err);
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send();
@@ -91,8 +98,12 @@ const checkJobStatus = async (jobId: string): Promise<IImage | null> => {
         {
           isPending: false,
           url: response.output[0].image,
+        },
+        {
+          new: true,
         }
       );
+      console.log(image);
       return image;
     } else {
       return null;

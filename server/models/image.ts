@@ -4,7 +4,7 @@ export interface IImage extends Document {
   jobId: string;
   prompt: string;
   isPending: boolean;
-  dateCreated?: Date;
+  dateCreated: Date;
   url?: string;
 }
 

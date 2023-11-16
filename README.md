@@ -50,3 +50,12 @@ $ npm run build
 ```
 
 https://github.com/viktorgullmark/react-express-mongo-ts-boilerplate
+
+Install MongoDB Locally
+
+```
+brew tap mongodb/brew
+brew update
+brew install mongodb-community@7.0
+brew services start mongodb-community@7.0
+```
